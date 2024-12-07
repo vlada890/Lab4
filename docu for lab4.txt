@@ -1,0 +1,49 @@
+Creating EcosystemEntity in order to define a common interface for all entities in the ecosystem (act, __str__, etc.).
+Concrete subclasses like Plant, Herbivore, and Carnivore inherit from EcosystemEntity and implement their own versions of the act method (and other methods, like feed and reproduce for animals).,using ABC which is the module Abstract Base Classes.This provides the necessary infrastructure for defining abstract base classes in Python.
+Creating a plant class,an animal class,an herbivore and a carnivore class.
+The Ecosystem class is responsible for managing all entities and their interactions.
+It calls act on each entity during each time step, allowing the entities to determine their behavior (e.g., growing, feeding, reproducing).
+In this setup each entity type knows how to act on its own,and that represents the principle of encapsulation: entities manage their own state and behavior.A Plant knows how to grow.
+A Herbivore knows how to feed and reproduce.
+The Ecosystem doesn't need to know the specifics of these actions; it just calls act.
+The system is easy to extend (to add an omnivore for example).This also allows for polymorphism because you can treat all entities uniformly (i.e., as EcosystemEntity objects) and rely on each entity's act method to perform the correct behavior.In short,you don't need to know the exact type of an entity to interact with it.On the contrary if ,say ,the EE class were removed and all the resposabilities were transferred to the Ecosystem class then, polymorphism would be lost because the Ecosystem class must explicitly handle the behavior of each entity type.
+
+"def act(self, entity):
+    if isinstance(entity, Plant):
+        entity.size += entity.growth_rate
+        print(f"{entity.name} grows to size {entity.size}.")
+    elif isinstance(entity, Herbivore):
+        self.herbivore_act(entity)
+    elif isinstance(entity, Carnivore):
+        self.carnivore_act(entity)"
+
+Adding a new entity type (e.g., Decomposer) would require modifying the Ecosystem.act method to handle it.Thus,without EcosystemEntity, the Ecosystem class would need to handle every entity type explicitly, undermining the benefits of abstraction and inheritance.
+1)EcosystemEntity has 3 things:an attribute-name,a method-print (because without it others..),an abstract method (like virtual..)
+2)class Plant inherits from EE;why -     def act(self, ecosystem):
+        self.grow() ?Somehow overwritten the abstract class of the EE,why do we even need that,can't we just call grow?
+3)abstract method feed reproduce for the next subclasses of animal.Abstract method 'act' put in use in this class,still using an abstract class to do it (implement an abstract class of the superclass EE).
+4)class Herbivore implements the feed abstract method : from a list with all entities in the ecosystem (an attribute of the ecosystem class) select only the objects of type class;if None then prompt the herbivore to eat any of the plants : the energy is increased and the size of the plant decreases(till it's deleted from the ecosystem).If there're no plants the herbivore loses energy.
+class Herbivore also implements the reproduce method if there is enough energy(which in turn consumes energy).
+class Carnivor is modeled in the same manner .
+This function simulates a simplified logistic population dynamics model to represent the interaction between two species:
+
+Rabbits (herbivores) as the prey.
+Foxes (carnivores) as the predators.
+First we're counting the Initial Populations.self.entities represents a collection of all entities in the simulation.
+Rabbits is the count of all herbivores (Herbivore objects);foxes is the count of all carnivores (Carnivore objects).Applying the logistic population model to foxes and rabbits in order to get delta_rabbits and delta_foxes.This monitors the contingent of rabbits and foxes in the simulation.
+max(0, ...) ensures the population does not drop below 0.
+r (Prey Growth Rate): This determines how fast the rabbit population grows in the absence of limiting factors like food or predators.
+K (Carrying Capacity): This is the maximum number of rabbits that the environment can sustain due to limited resources (e.g., food, space).
+c (Predation Rate Coefficient): This governs how strongly the foxes impact the rabbit population. A higher value means foxes consume more rabbits.
+Implementation.
+First ,create the object ecosystem ,use its method add_enitity to set up an ecosystem.Use the method simulate which depends on the attribute list entities.When entity.act(self) is called, Python looks directly at the type of the object (e.g., Plant, Herbivore, or Carnivore) and executes the act method defined in that class.
+It does not use the abstract method in EcosystemEntity because abstract methods are meant to be overridden and cannot be directly called.
+This is an example of polymorphism, where the same method name (act) is implemented differently in each subclass.The correct version is selected based on the type of the object.
+For Plant:
+The grow method is called, which increases the plant's size.
+For Herbivore:
+The feed method is called first to attempt to eat a plant and gain energy.
+If the herbivore's energy has reached or exceeded its reproduction threshold, the reproduce method is called, creating a new herbivore.
+For Carnivore:
+The feed method is called to attempt to eat a herbivore and gain energy.
+If the carnivore's energy has reached or exceeded its reproduction threshold, the reproduce method is called, creating a new carnivore.
