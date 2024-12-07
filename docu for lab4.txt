@@ -33,6 +33,8 @@ max(0, ...) ensures the population does not drop below 0.
 r (Prey Growth Rate): This determines how fast the rabbit population grows in the absence of limiting factors like food or predators.
 K (Carrying Capacity): This is the maximum number of rabbits that the environment can sustain due to limited resources (e.g., food, space).
 c (Predation Rate Coefficient): This governs how strongly the foxes impact the rabbit population. A higher value means foxes consume more rabbits.
+As it stands, the method acts more like a summation tool running in parallel to the actual simulation.
+It provides a summary of what the rabbit and fox populations would look like if they followed the logistic equations instead of relying on the individual behaviors and methods.
 Implementation.
 First ,create the object ecosystem ,use its method add_enitity to set up an ecosystem.Use the method simulate which depends on the attribute list entities.When entity.act(self) is called, Python looks directly at the type of the object (e.g., Plant, Herbivore, or Carnivore) and executes the act method defined in that class.
 It does not use the abstract method in EcosystemEntity because abstract methods are meant to be overridden and cannot be directly called.
