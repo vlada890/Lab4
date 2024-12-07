@@ -1,11 +1,10 @@
 Creating EcosystemEntity in order to define a common interface for all entities in the ecosystem (act, __str__, etc.).
 Concrete subclasses like Plant, Herbivore, and Carnivore inherit from EcosystemEntity and implement their own versions of the act method (and other methods, like feed and reproduce for animals).,using ABC which is the module Abstract Base Classes.This provides the necessary infrastructure for defining abstract base classes in Python.
-Creating a plant class,an animal class,an herbivore and a carnivore class.
+Creating a plant class,an animal class,an herbivore,an omnivore and a carnivore class.
 The Ecosystem class is responsible for managing all entities and their interactions.
-It calls act on each entity during each time step, allowing the entities to determine their behavior (e.g., growing, feeding, reproducing).
-In this setup each entity type knows how to act on its own,and that represents the principle of encapsulation: entities manage their own state and behavior.A Plant knows how to grow.
-A Herbivore knows how to feed and reproduce.
-The Ecosystem doesn't need to know the specifics of these actions; it just calls act.
+It calls act on each entity during each time step, allowing the entities to determine their behavior (e.g., growing, feeding, reproducing, moving or attacking).
+In this setup each entity type knows how to act on its own,and that represents the principle of encapsulation: entities manage their own state and behavior.
+A Plant knows how to grow.A Herbivore knows how to feed and reproduce.The Ecosystem doesn't need to know the specifics of these actions; it just calls act.
 The system is easy to extend (to add an omnivore for example).This also allows for polymorphism because you can treat all entities uniformly (i.e., as EcosystemEntity objects) and rely on each entity's act method to perform the correct behavior.In short,you don't need to know the exact type of an entity to interact with it.On the contrary if ,say ,the EE class were removed and all the resposabilities were transferred to the Ecosystem class then, polymorphism would be lost because the Ecosystem class must explicitly handle the behavior of each entity type.
 
 "def act(self, entity):
@@ -18,7 +17,7 @@ The system is easy to extend (to add an omnivore for example).This also allows f
         self.carnivore_act(entity)"
 
 Adding a new entity type (e.g., Decomposer) would require modifying the Ecosystem.act method to handle it.Thus,without EcosystemEntity, the Ecosystem class would need to handle every entity type explicitly, undermining the benefits of abstraction and inheritance.
-1)EcosystemEntity has 3 things:an attribute-name,a method-print (because without it others..),an abstract method (like virtual..)
+1)EcosystemEntity has 3 things:an attribute-name,a print method,an abstract method (like virtual in cpp)
 2)class Plant inherits from EE;
 3)abstract method feed reproduce for the next subclasses of animal.Abstract method 'act' put in use in this class,still using an abstract class to do it (implement an abstract class of the superclass EE).
 4)class Herbivore implements the feed abstract method : from a list with all entities in the ecosystem (an attribute of the ecosystem class) select only the objects of type class;if None then prompt the herbivore to eat any of the plants : the energy is increased and the size of the plant decreases(till it's deleted from the ecosystem).If there're no plants the herbivore loses energy.
