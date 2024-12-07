@@ -104,9 +104,9 @@ class Ecosystem:
             print(f"\n--- Time step {self.time} ---")
             for entity in list(self.entities):  # Use a copy of the list to avoid iteration issues
                 entity.act(self)
-            self.logistic_population_dynamics()
+            //self.logistic_population_dynamics()
 
-    def logistic_population_dynamics(self):
+    """def logistic_population_dynamics(self):
         rabbits = sum(1 for entity in self.entities if isinstance(entity, Herbivore))
         foxes = sum(1 for entity in self.entities if isinstance(entity, Carnivore))
 
@@ -121,7 +121,7 @@ class Ecosystem:
             rabbits = max(0, rabbits + math.ceil(delta_rabbits))
             foxes = max(0, foxes + math.ceil(delta_foxes))
 
-            print(f"Logistic dynamics: Rabbits={rabbits}, Foxes={foxes}.")
+            print(f"Logistic dynamics: Rabbits={rabbits}, Foxes={foxes}.")"""
 
 if __name__ == "__main__":
     ecosystem = Ecosystem()
