@@ -19,8 +19,7 @@ The system is easy to extend (to add an omnivore for example).This also allows f
 
 Adding a new entity type (e.g., Decomposer) would require modifying the Ecosystem.act method to handle it.Thus,without EcosystemEntity, the Ecosystem class would need to handle every entity type explicitly, undermining the benefits of abstraction and inheritance.
 1)EcosystemEntity has 3 things:an attribute-name,a method-print (because without it others..),an abstract method (like virtual..)
-2)class Plant inherits from EE;why -     def act(self, ecosystem):
-        self.grow() ?Somehow overwritten the abstract class of the EE,why do we even need that,can't we just call grow?
+2)class Plant inherits from EE;
 3)abstract method feed reproduce for the next subclasses of animal.Abstract method 'act' put in use in this class,still using an abstract class to do it (implement an abstract class of the superclass EE).
 4)class Herbivore implements the feed abstract method : from a list with all entities in the ecosystem (an attribute of the ecosystem class) select only the objects of type class;if None then prompt the herbivore to eat any of the plants : the energy is increased and the size of the plant decreases(till it's deleted from the ecosystem).If there're no plants the herbivore loses energy.
 class Herbivore also implements the reproduce method if there is enough energy(which in turn consumes energy).
