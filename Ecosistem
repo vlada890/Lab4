@@ -104,35 +104,15 @@ class Ecosystem:
             print(f"\n--- Time step {self.time} ---")
             for entity in list(self.entities):  # Use a copy of the list to avoid iteration issues
                 entity.act(self)
-            //self.logistic_population_dynamics()
 
-    """def logistic_population_dynamics(self):
-        rabbits = sum(1 for entity in self.entities if isinstance(entity, Herbivore))
-        foxes = sum(1 for entity in self.entities if isinstance(entity, Carnivore))
+ecosystem = Ecosystem()
 
-        r = 0.1  
-        K = 50   
-        c = 0.01 
+for i in range(10):
+    ecosystem.add_entity(Plant(f"Plant-{i}", growth_rate=1))
+for i in range(5):
+    ecosystem.add_entity(Herbivore(f"Rabbit-{i}", energy=20, reproduction_threshold=50))
 
-        if rabbits > 0 and foxes > 0:
-            delta_rabbits = r * rabbits * (1 - rabbits / K) - c * rabbits * foxes
-            delta_foxes = c * rabbits * foxes * 0.1 - 0.05 * foxes
+for i in range(2):
+    ecosystem.add_entity(Carnivore(f"Fox-{i}", energy=40, reproduction_threshold=100))
 
-            rabbits = max(0, rabbits + math.ceil(delta_rabbits))
-            foxes = max(0, foxes + math.ceil(delta_foxes))
-
-            print(f"Logistic dynamics: Rabbits={rabbits}, Foxes={foxes}.")"""
-
-if __name__ == "__main__":
-    ecosystem = Ecosystem()
-
-    for i in range(10):
-        ecosystem.add_entity(Plant(f"Plant-{i}", growth_rate=1))
-
-    for i in range(5):
-        ecosystem.add_entity(Herbivore(f"Rabbit-{i}", energy=20, reproduction_threshold=50))
-
-    for i in range(2):
-        ecosystem.add_entity(Carnivore(f"Fox-{i}", energy=40, reproduction_threshold=100))
-
-    ecosystem.simulate(timesteps=20)
+ecosystem.simulate(timesteps=20)
