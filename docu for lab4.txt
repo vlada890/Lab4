@@ -23,8 +23,23 @@ Adding a new entity type (e.g., Decomposer) would require modifying the Ecosyste
 4)class Herbivore implements the feed abstract method : from a list with all entities in the ecosystem (an attribute of the ecosystem class) select only the objects of type plants;if not None then prompt the herbivore to eat any of the plants : the energy is increased and the size of the plant decreases(till it's deleted from the ecosystem).If there're no plants the herbivore loses energy.
 class Herbivore also implements the reproduce method if there is enough energy(which in turn consumes energy).
 class Carnivor is modeled in the same manner .
-This function simulates a simplified logistic population dynamics model to represent the interaction between two species:
+    """def logistic_population_dynamics(self):
+        rabbits = sum(1 for entity in self.entities if isinstance(entity, Herbivore))
+        foxes = sum(1 for entity in self.entities if isinstance(entity, Carnivore))
 
+        r = 0.1  
+        K = 50   
+        c = 0.01 
+
+        if rabbits > 0 and foxes > 0:
+            delta_rabbits = r * rabbits * (1 - rabbits / K) - c * rabbits * foxes
+            delta_foxes = c * rabbits * foxes * 0.1 - 0.05 * foxes
+
+            rabbits = max(0, rabbits + math.ceil(delta_rabbits))
+            foxes = max(0, foxes + math.ceil(delta_foxes))
+
+            print(f"Logistic dynamics: Rabbits={rabbits}, Foxes={foxes}.")"""
+This function simulates a simplified logistic population dynamics model to represent the interaction between two species:
 Rabbits (herbivores) as the prey.
 Foxes (carnivores) as the predators.
 First we're counting the Initial Populations.self.entities represents a collection of all entities in the simulation.
